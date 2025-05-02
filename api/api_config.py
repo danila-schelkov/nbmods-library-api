@@ -8,9 +8,10 @@ from pydantic_settings import (
 
 
 class ApiConfig(BaseSettings):
-    reload: bool = False
     host: IPvAnyAddress = "0.0.0.0"
     port: int = 8000
+    reload: bool = False
+    root_path: str = ""
 
     model_config = SettingsConfigDict(toml_file="configs/api_config.toml")
 

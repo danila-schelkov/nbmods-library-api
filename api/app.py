@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 
-from library.index import Index, get_index
+from api.api_config import config
+from api.routes.index_route import api
 
 app = FastAPI()
 
-
-@app.get("/", response_model_exclude_none=True)
-def index() -> Index:
-    return get_index()
+app.mount(config.root_path, api)
