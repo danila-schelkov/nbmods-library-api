@@ -1,6 +1,4 @@
-from pathlib import Path
-
-from pydantic import HttpUrl
+from pydantic.networks import IPvAnyAddress
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -9,12 +7,12 @@ from pydantic_settings import (
 )
 
 
-class Config(BaseSettings):
-    mods_path: Path = Path("mods")
-    icons_path: Path = Path("icons")
-    icons_url: HttpUrl = "https://donutquine.dev/nbmods/icons/"
+class ApiConfig(BaseSettings):
+    reload: bool = False
+    host: IPvAnyAddress = "0.0.0.0"
+    port: int = 8000
 
-    model_config = SettingsConfigDict(toml_file="configs/library_config.toml")
+    model_config = SettingsConfigDict(toml_file="configs/api_config.toml")
 
     @classmethod
     def settings_customise_sources(
@@ -28,4 +26,4 @@ class Config(BaseSettings):
         return (TomlConfigSettingsSource(settings_cls),)
 
 
-config = Config()
+api_config = ApiConfig()
