@@ -26,4 +26,4 @@ class ApiConfig(BaseSettings):
         return (TomlConfigSettingsSource(settings_cls),)
 
 
-api_config = ApiConfig()
+config = ApiConfig()

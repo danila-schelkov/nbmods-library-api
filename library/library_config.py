@@ -9,10 +9,11 @@ from pydantic_settings import (
 )
 
 
-class Config(BaseSettings):
+class LibraryConfig(BaseSettings):
     mods_path: Path = Path("mods")
     icons_path: Path = Path("icons")
     icons_url: HttpUrl = "https://donutquine.dev/nbmods/icons/"
+    mod_extension: str = ".NullsBrawlAssets"
 
     model_config = SettingsConfigDict(toml_file="configs/library_config.toml")
 
@@ -28,4 +29,4 @@ class Config(BaseSettings):
         return (TomlConfigSettingsSource(settings_cls),)
 
 
-config = Config()
+config = LibraryConfig()

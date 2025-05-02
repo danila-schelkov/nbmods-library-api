@@ -1,5 +1,6 @@
 import os
 import re
+import shutil
 from urllib.parse import urljoin
 from uuid import UUID
 from zipfile import ZipFile
@@ -51,7 +52,7 @@ def get_index() -> Index:
     config.icons_path.mkdir(parents=True, exist_ok=True)
 
     for file in os.listdir(config.mods_path):
-        if not file.endswith(".NullsBrawlAssets"):
+        if not file.endswith(config.mod_extension):
             continue
 
         mod_path = config.mods_path / file
@@ -80,5 +81,7 @@ def get_index() -> Index:
                 )
 
             index.library.append(library_mod)
+
+        shutil.move(mod_path, config.mods_path / (mod_id + config.mod_extension))
 
     return index
